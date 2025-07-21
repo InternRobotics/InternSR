@@ -1,5 +1,5 @@
 # Intern-EP
-## Introduction
+## 🏠 Introduction
 
 The Intern-EP repository focuses on embodied perception, covering both benchmarks and models for embodied scene understanding and reasoning. Currently, it includes:
 ### Models
@@ -13,12 +13,12 @@ The Intern-EP repository focuses on embodied perception, covering both benchmark
 
 
 
-## What's New
+## 🔥 What's New
 
 ### Highlight
 2025/7 - The first version of Intern-EP includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
 
-## Overview of Intern-EP
+## 📋 Overview of Intern-EP
 
 | Benchmark       | Domain                | Method                                      | Input Modality                                       | Data  Scale                                     |
 |-----------------|-----------------------|----------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|
@@ -27,7 +27,7 @@ The Intern-EP repository focuses on embodied perception, covering both benchmark
 | [MMSI-Bench](https://runsenxu.com/projects/MMSI_Bench/)    | Scene Spatial Reasoning       | LLaVA / InternVL / QwenVL / Proprietary Models                      | `image`, `text`                      | 1k            |
 | EgoExo-Bench  | Scene Spatial Reasoning | LLaVA / InternVL / QwenVL / Proprietary Models                       | `video`,  `text`                             | 7k               |
 
-## Getting Start
+## 🔨 Getting Start
 Clone this repo.
 ```shell
 git clone https://github.com/rbler1234/Intern-EP.git
@@ -116,7 +116,7 @@ We recommend placing all data under `./data`. The expected directory structure u
     ```
 </details>
 
-## Evaluation Tutorial
+## 🔍 Evaluation Tutorial
 ### For OST-Bench/MMSI-Bench/EgoExo-Bench
 Our evaluation framework for these benchmarks is built on [VLMEvalKit](https://github.com/open-compass/VLMEvalKit). The system supports evaluation of multiple model families including: o1/o3, GPT series, Gemini series, Claude series, InternVL series, QwenVL series and LLaVA series. You need to first configure the environment variables in `.env`:
 ```shell
@@ -154,10 +154,12 @@ python -m scripts.eval_mmscan_qa --answer-file path_of_result
 python -m scripts.eval_mmscan_gpt --answer-file path_of_result --api_key XXX --tmp_path tmp_path_to_save
 ```
 
-## Acknowledge
+## 👏 Acknowledgements
 
 The evaluation code for OST-Bench / MMSI-Bench / EgoExo-Bench is based on [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
 
-## TODO
+## 📝 TODO List
+- \[ \] Support more models for MMScan.
+- \[ \] Support MMScan Visual Grounding Task.
 
 
