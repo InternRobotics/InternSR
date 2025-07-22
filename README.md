@@ -1,7 +1,7 @@
-# Intern-EP
+# Intern-SR
 ## 🏠 Introduction
 
-The Intern-EP repository focuses on embodied perception, covering both benchmarks and models for embodied scene understanding and reasoning. Currently, it includes:
+The Intern-SR repository focuses on spatial reasoning, covering both benchmarks and models for embodied scene understanding and reasoning. Currently, it includes:
 ### Models
 - [LLaVA-3D](https://zcmax.github.io/projects/LLaVA-3D/)
 ### Benchmarks
@@ -14,7 +14,7 @@ The Intern-EP repository focuses on embodied perception, covering both benchmark
 
 
 ## 🔥 News
-- [2025/07] - The first version of Intern-EP includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
+- [2025/07] - The first version of Intern-SR includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
 
 ## 📋 Table of Contents
 - [🏠 Introduction](#-introduction)
@@ -28,8 +28,8 @@ The Intern-EP repository focuses on embodied perception, covering both benchmark
 ## 📚 Getting Started
 Clone this repo.
 ```shell
-git clone https://github.com/rbler1234/Intern-EP.git
-cd Intern-EP
+git clone https://github.com/rbler1234/Intern-SR.git
+cd Intern-SR
 ```
 
 <details>
