@@ -234,7 +234,7 @@ class RGBDVideoProcessor(ProcessorMixin):
             if 'scannet' in frame:
                 depth = os.path.join(video_folder, video_info[frame]['depth'])
             elif '3rscan' in frame:
-                depth = os.path.join(video_folder, frame.replace('color.jpg', 'depth.png').replace('3rscan', '3rscan_depth'))
+                depth = os.path.join(video_folder, video_info[frame]['depth'])
             elif 'matterport' in frame:
                 depth = os.path.join(video_folder, video_info[frame]['depth'])
                 intrinsic = np.array(video_info[frame]['intrinsic'])

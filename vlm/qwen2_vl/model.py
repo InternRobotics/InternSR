@@ -471,7 +471,7 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
             self.generate_kwargs['use_audio_in_video'] = self.use_audio_in_video
             self.generate_kwargs['return_audio'] = False
         if dataset=='OST':
-            self.generate_kwargs.max_new_tokens = 4096
+            self.generate_kwargs['max_new_tokens'] = 4096
         generated_ids = self.model.generate(
             **inputs,
             **self.generate_kwargs,

@@ -93,6 +93,9 @@ class EgoExoBench_MCQ(VideoBaseDataset):
     def save_video_into_images(self, media, mcq_idx):
         bound = None
         video_root = self.video_root
+        if os.path.exists(osp.join(video_root, 'processed_frames', str(mcq_idx))):
+            dir_name = osp.join(video_root, 'processed_frames', str(mcq_idx))
+            return [osp.join(dir_name,img_file) for img_file in os.listdir(dir_name)]
         
         if media['type'] in ['frames', 'image']:
             media_paths = [osp.join(video_root, im) for im in media['image_paths']]
@@ -152,7 +155,7 @@ class EgoExoBench_MCQ(VideoBaseDataset):
 
             return frame_paths
     
-    
+        
         torch_imgs, frame_indices = read_video(video_path, bound, media['nframes'])
         img_frame_paths = save_video_frames(torch_imgs, video_root, frame_indices, mcq_idx)
         return img_frame_paths
@@ -193,6 +196,7 @@ class EgoExoBench_MCQ(VideoBaseDataset):
             line = self.data.iloc[line]
             mcq_idx = int(line['index'])
         text = line['question'] + '\nOptions:\n' + line['options'] + '\n' + line['response_format']
+        print(mcq_idx)
         message = self.process_text_and_media(text, line['medias'], video_llm, mcq_idx)
         return message
     
