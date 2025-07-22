@@ -1,4 +1,4 @@
-from smp import *
+from utils.base_utils import *
 from .utils.video_base import VideoBaseDataset
 from .utils import build_judge, DEBUG_MESSAGE
 import torchvision.transforms as T
@@ -23,20 +23,8 @@ class EgoExoBench_MCQ(VideoBaseDataset):
     def supported_datasets(cls):
         return ['EgoExoBench_MCQ']
 
-    def prepare_dataset(self, dataset_name='EgoExoBench_MCQ', repo_id='Heleun/EgoExoBench_MCQ'):
-        def check_integrity(pth):
-            data_file = osp.join(pth,'annotations', f'{dataset_name}.tsv')
+    def prepare_dataset(self, dataset_name='EgoExoBench_MCQ'):
 
-            if not os.path.exists(data_file):
-                return False
-
-            if md5(data_file) != self.MD5:
-                return False
-
-            data = load(data_file)
-            
-            return True
-        cache_path = get_cache_path(repo_id)
         self.video_root = osp.join(LMUDataRoot(),'videos')
 
 
@@ -64,15 +52,19 @@ class EgoExoBench_MCQ(VideoBaseDataset):
         try:
             from moviepy import VideoFileClip, ImageSequenceClip
         except:
-            raise ImportError(
-                'MoviePy is not installed, please install it by running "pip install moviepy"'
-            )
+            pass
         video_root = self.video_root
 
-        if media['type'] in ['frames']:
+        if media['type'] in ['image']:
+            original_image_path = osp.join(video_root, media['image_paths'][0])
+            processed_video_path = osp.join(video_root, 'processed_video', f'{mcq_idx}.jpg')
+            if not os.path.exists(processed_video_path):
+                shutil.copy(original_image_path, processed_video_path)
+            return dict(type='image', value=processed_video_path)  
+        
+        elif media['type'] in ['frames']:
             input_images = [osp.join(video_root, im) for im in media['image_paths']]
-            processed_video_path = f'{mcq_idx}.mp4'
-            processed_video_path = osp.join(video_root, 'processed_video', processed_video_path)
+            processed_video_path = osp.join(video_root, 'processed_video', f'{mcq_idx}.mp4')
             media['nframes'] = len(input_images)//2*2
             if not os.path.exists(processed_video_path):
                 # using MoviePy to transform images into mp4
@@ -80,33 +72,40 @@ class EgoExoBench_MCQ(VideoBaseDataset):
                 image_clip = ImageSequenceClip(image_files, fps=self.frame_fps)
                 image_clip.write_videofile(processed_video_path, codec='libx264')
                 image_clip.close()
-        elif media['type'] in ['image']:
-            return dict(type='image', value=osp.join(video_root, media['image_paths'][0]))
         elif media['type'] in ['video']:
-            processed_video_path = osp.join(video_root, media['video_path'])
+            original_video_path = osp.join(video_root, media['video_path'])
+            processed_video_path = osp.join(video_root, 'processed_video', f'{mcq_idx}.mp4')
+            if 'video_start' in media and 'video_end' in media and media['video_start'] is not None and media['video_end'] is not None:
+                video_start, video_end = media['video_start'], media['video_end']                    
+                if not os.path.exists(processed_video_path):                
+                    video_clip = VideoFileClip(original_video_path)
+                    clip = video_clip.subclipped(video_start, min(video_end, video_clip.duration))
+                    clip.write_videofile(processed_video_path)
+                    clip.close()
+            else:
+                if not os.path.exists(processed_video_path):
+                    shutil.copy(original_video_path, processed_video_path)
         else:
             raise ValueError(f"Unsupported media type: {media['type']}")
 
-        if 'video_start' in media and 'video_end' in media and media['video_start'] is not None and media['video_end'] is not None:
-            video_start, video_end = media['video_start'], media['video_end']
-            output_video_path = osp.join(video_root, 'processed_video', f'{mcq_idx}.mp4')
-                
-            if not os.path.exists(output_video_path):                
-                video_clip = VideoFileClip(processed_video_path)
-                clip = video_clip.subclipped(video_start, min(video_end, video_clip.duration))
-                clip.write_videofile(output_video_path)
-                clip.close()
-        else:
-            output_video_path = processed_video_path
-
-        return dict(type='video', value=output_video_path, nframes=media.get('nframes', 8))
+        return dict(type='video', value=processed_video_path, nframes=media.get('nframes', 8))
     
     def save_video_into_images(self, media, mcq_idx):
         bound = None
         video_root = self.video_root
         
         if media['type'] in ['frames', 'image']:
-            input_images = [osp.join(video_root, im) for im in media['image_paths']]
+            media_paths = [osp.join(video_root, im) for im in media['image_paths']]
+            save_dir = osp.join(video_root, 'processed_frames', str(mcq_idx))
+            os.makedirs(save_dir, exist_ok=True)
+            input_images = []
+            for media_path in media_paths:
+                img_path = media_path.split('/')[-1]
+                save_image_path = osp.join(save_dir, img_path)
+                if not os.path.exists(save_image_path):
+                    shutil.copy(media_path, save_image_path)
+                input_images.append(save_image_path)
+                
             return input_images
             
         if 'video_start' in media and 'video_end' in media and media['video_start'] is not None and media['video_end'] is not None:
@@ -123,6 +122,11 @@ class EgoExoBench_MCQ(VideoBaseDataset):
 
             images_group = list()
             frame_indices = self.get_index(bound, fps, max_frame, first_idx=0, num_segments=num_segments)
+            save_dir = osp.join(video_root, 'processed_frames', str(mcq_idx))
+            
+            if osp.exists(save_dir) and len(os.listdir(save_dir)) > 0:
+                return None, frame_indices
+        
             for frame_index in frame_indices:
                 img = Image.fromarray(vr[frame_index].asnumpy())
                 images_group.append(img)
@@ -131,9 +135,10 @@ class EgoExoBench_MCQ(VideoBaseDataset):
 
         def save_video_frames(imgs, video_root, frame_indices, mcq_idx):
 
-            frame_base_path = osp.join(video_root, 'processed_frames', str(mcq_idx))
-            os.makedirs(frame_base_path, exist_ok=True)
-            frame_paths = [osp.join(frame_base_path, f'{fidx}.jpg') for fidx in frame_indices]
+            save_dir = osp.join(video_root, 'processed_frames', str(mcq_idx))
+            os.makedirs(save_dir, exist_ok=True)
+            frame_paths = [osp.join(save_dir, f'{fidx:07d}.jpg') for fidx in frame_indices]
+
             flag = np.all([osp.exists(pth) for pth in frame_paths])
 
             if not flag:

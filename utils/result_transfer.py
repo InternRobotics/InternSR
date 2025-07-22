@@ -1,4 +1,4 @@
-from smp import *
+from utils.base_utils import *
 from dataset.utils.judge_util import build_judge
 from dataset.utils.multiple_choice import extract_answer_from_item
 from .matching_util import can_infer

@@ -7,7 +7,7 @@ import numpy as np
 import warnings
 from tqdm import tqdm
 from .utils import DEBUG_MESSAGE, build_judge
-from smp import (LMUDataRoot, file_size, load, dump, decode_base64_to_image_file,
+from utils.base_utils import (LMUDataRoot, file_size, load, dump, decode_base64_to_image_file,
                    listinstr, gpt_key_set)
 import string
 import glob

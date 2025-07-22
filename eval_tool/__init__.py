@@ -7,7 +7,7 @@ try:
 except ImportError:
     pass
 
-from smp import *
+from utils.base_utils import *
 from vlm.api import *
 from dataset import *
 from utils import *

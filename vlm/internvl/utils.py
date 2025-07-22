@@ -14,7 +14,7 @@ from transformers import AutoTokenizer, AutoConfig, AutoModel, CLIPImageProcesso
 
 from ..base import BaseModel
 from dataset import DATASET_TYPE, DATASET_MODALITY
-from smp import *
+from utils.base_utils import *
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)

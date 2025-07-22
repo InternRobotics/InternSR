@@ -11,7 +11,7 @@ from transformers import StoppingCriteria
 
 from ..base import BaseModel
 from .prompt import Qwen2VLPromptMixin
-from smp import get_gpu_memory, listinstr
+from utils.base_utils import get_gpu_memory, listinstr
 from dataset import DATASET_MODALITY
 
 VLLM_MAX_IMAGE_INPUT_NUM = 24
@@ -507,6 +507,8 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
 
     def generate_inner_lmdeploy(self, message, dataset=None):
         from lmdeploy import GenerationConfig
+        if dataset=='OST':
+            self.max_new_tokens = 4096
         gen_config = GenerationConfig(
             max_new_tokens=self.max_new_tokens,
             top_p=self.generate_kwargs['top_p'],
@@ -567,6 +569,8 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
                 video_inputs['mm_processor_kwargs']['use_audio_in_video'] = True
             if videos_nd[0].shape[0] > VLLM_MAX_IMAGE_INPUT_NUM:
                 print('video input sequence may be too long for vllm, Maybe cannot generate response for VLLM')
+        if dataset=='OST':
+            self.max_new_tokens = 4096
         sampling_params = SamplingParams(
             temperature=0.0, max_tokens=self.max_new_tokens, stop_token_ids=None
         )

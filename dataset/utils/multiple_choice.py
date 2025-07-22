@@ -1,6 +1,6 @@
 import pandas as pd
 from utils import can_infer, track_progress_rich, can_infer_lego
-from smp import *
+from utils.base_utils import *
 import numpy as np
 import re
 

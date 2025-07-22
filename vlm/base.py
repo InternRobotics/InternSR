@@ -1,4 +1,4 @@
-from smp import *
+from utils.base_utils import *
 from dataset import img_root_map, DATASET_TYPE
 from abc import abstractmethod
 

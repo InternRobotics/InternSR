@@ -119,7 +119,7 @@ def eval_model(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="")
+    parser.add_argument("--model-path", type=str, default="/mnt/inspurfs/efm_t/zhuchenming/LLaVA-3D-7B")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--video-folder", type=str, default="./data/images/mmscan")
     parser.add_argument("--question-file", type=str, default="./data/annotations/mmscan_qa_val_0.01.json")

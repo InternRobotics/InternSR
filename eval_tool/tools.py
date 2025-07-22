@@ -2,7 +2,7 @@ import sys
 from collections import deque
 from dataset import SUPPORTED_DATASETS
 from .config import *
-from smp import *
+from utils.base_utils import *
 
 # Define valid modes
 MODES = ('dlist', 'mlist', 'missing', 'circular', 'localize', 'check', 'run', 'eval', 'merge_pkl', 'scan')

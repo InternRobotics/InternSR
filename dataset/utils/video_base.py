@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from smp import *
+from utils.base_utils import *
 
 
 class VideoBaseDataset:

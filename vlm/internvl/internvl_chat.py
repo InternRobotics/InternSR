@@ -28,7 +28,7 @@ from .utils import mpo_prompt_with_final_answer, mpo_prompt_without_final_answer
 
 from ..base import BaseModel
 from dataset import DATASET_TYPE, DATASET_MODALITY, build_dataset, infer_dataset_basename
-from smp import *
+from utils.base_utils import *
 def split_model(model_name,model_path):
     if 'InternVL3' in model_name:
         device_map = {}

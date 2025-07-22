@@ -8,7 +8,7 @@ from rich.text import Text
 import os.path as osp
 import time
 import portalocker
-from smp import load, dump
+from utils.base_utils import load, dump
 
 
 def track_progress_rich(

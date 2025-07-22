@@ -4,7 +4,7 @@ from abc import abstractproperty
 import sys
 import os.path as osp
 from ..base import BaseModel
-from smp import *
+from utils.base_utils import *
 from dataset import DATASET_TYPE, DATASET_MODALITY
 import copy
 import requests

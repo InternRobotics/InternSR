@@ -1,7 +1,7 @@
-# Intern-SR
+# InternSR
 ## 🏠 Introduction
 
-The Intern-SR repository focuses on spatial reasoning, covering both benchmarks and models for embodied scene understanding and reasoning. Currently, it includes:
+The InternSR repository focuses on spatial reasoning, covering both benchmarks and models for embodied scene understanding and reasoning. Currently, it includes:
 ### Models
 - [LLaVA-3D](https://zcmax.github.io/projects/LLaVA-3D/)
 ### Benchmarks
@@ -14,7 +14,7 @@ The Intern-SR repository focuses on spatial reasoning, covering both benchmarks 
 
 
 ## 🔥 News
-- [2025/07] - The first version of Intern-SR includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
+- [2025/07] - The first version of InternSR includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
 
 ## 📋 Table of Contents
 - [🏠 Introduction](#-introduction)
@@ -28,8 +28,8 @@ The Intern-SR repository focuses on spatial reasoning, covering both benchmarks 
 ## 📚 Getting Started
 Clone this repo.
 ```shell
-git clone https://github.com/rbler1234/Intern-SR.git
-cd Intern-SR
+git clone https://github.com/rbler1234/InternSR.git
+cd InternSR
 ```
 
 <details>
@@ -43,7 +43,7 @@ pip install -r requirement/base.txt
 # For MMScan evaluation:
 pip install -r requirement/mmscan.txt
 ```
-(b) To perform the inference of LLava3D, please install the required environment as follows:
+(b) To perform the inference of LLaVA-3D, please install the required environment as follows:
 ```shell
 cd vlm/LLaVA-3D
 pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu118
@@ -75,7 +75,10 @@ We recommend placing all data under `./data`. The expected directory structure u
     │   │   ├── matterport3d
     │   │   ├── scannet
     ├── annotations/
-    │   ├── embodiedscan_infos_full.json
+    │   ├── embodiedscan_video_meta/
+    │   ├── ├── image.json
+    │   ├── ├── depth.json
+    │   ├── ├── ...
     │   ├── mmscan_qa_val_0.1.json
     │   ├── ...
     ```
@@ -100,16 +103,15 @@ We recommend placing all data under `./data`. The expected directory structure u
     ├── annotations/ MMSI_Bench.tsv
     ```
 - #### EgoExo-Bench
-    1. Download the videos from the following sources: [Ego-Exo4D](https://ego-exo4d-data.org/), [LEMMA](https://sites.google.com/view/lemma-activity), [EgoExoLearn](https://huggingface.co/datasets/hyf015/EgoExoLearn), [TF2023](https://github.com/ziweizhao1993/PEN), [EgoMe](https://huggingface.co/datasets/HeqianQiu/EgoMe), [CVMHAT](https://github.com/RuizeHan/CVMHT).
-    2. Download the [`.tsv` file](https://drive.google.com/file/d/1pRGd9hUgwCzMU6JSPFxpjGAtCChwIB9G/view?usp=sharing) , place them as follows: 
+    1. Download the processed video data from the [huggingface](https://huggingface.co/datasets/onlyfaces/EgoExoBench/tree/main). 
+    2. Due to license restrictions, data from the [Ego-Exo4D](https://ego-exo4d-data.org/) project is not included. Users should acquire it separately by following the official Ego-Exo4D guidelines.
+    3. Download the [`.tsv` file](https://drive.google.com/file/d/1pRGd9hUgwCzMU6JSPFxpjGAtCChwIB9G/view?usp=sharing) , place them as follows: 
     ```shell
     ./data
     ├── videos/
-    │   ├── CVMHAT/data
     │   ├── EgoExo4D/tasks
-    │   ├── EgoExoLearn
-    │   ├── LEMMA
-    │   ├── TF2023/data
+    │   ├── processed_frames
+    │   ├── processed_video
     ├── annotations/ EgoExoBench_MCQ.tsv
     ```
 </details>

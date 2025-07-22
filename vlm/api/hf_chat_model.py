@@ -2,7 +2,7 @@ import os
 import sys
 import os.path as osp
 import torch
-from ..smp import *
+from utils.base_utils import *
 
 
 def get_gpu_num(model_name):

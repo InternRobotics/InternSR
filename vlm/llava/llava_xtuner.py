@@ -10,7 +10,7 @@ from huggingface_hub import snapshot_download
 from PIL import Image
 
 from ..base import BaseModel
-from smp import *
+from utils.base_utils import *
 from dataset import DATASET_TYPE
 
 

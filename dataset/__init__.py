@@ -5,7 +5,7 @@ from .ost_bench import OSTDataset
 from .mmsi_bench import MMSIBenchDataset, MMSIBenchCircular
 from .egoexobench import EgoExoBench_MCQ
 from .utils import *
-from smp import *
+from utils.base_utils import *
 
 class ConcatDataset(ImageBaseDataset):
     # This dataset takes multiple dataset names as input and aggregate them into a single dataset.

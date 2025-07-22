@@ -58,9 +58,40 @@ class RGBDVideoProcessor(ProcessorMixin):
         self.image_processor = CLIPImageProcessor.from_pretrained(self.vision_tower_name)
         self.tokenizer = tokenizer
         self.num_frames = num_frames
+        
+        def combine_meta_info(meta_info):
+            process_info = {}
+            for scan_id in meta_info:
+                process_info[scan_id] = {}
+                for idx in range(len(meta_info[scan_id]['image'])):
+                    image = meta_info[scan_id]['image'][idx]
+                    process_info[scan_id][image] = {}
+                    for attribute_name in ['depth','pose']:
+                        process_info[scan_id][image][attribute_name] = meta_info[scan_id][attribute_name][idx]
+                    if 'matterport3d' in scan_id:
+                        process_info[scan_id][image]['intrinsic'] = meta_info[scan_id]['intrinsic'][idx]
+                    elif 'scannet' in scan_id:
+                        if idx ==len(meta_info[scan_id]['image'])-1:
+                            process_info[scan_id]['depth_intrinsic'] =  meta_info[scan_id]['depth_intrinsic'][idx]
+                            process_info[scan_id]['intrinsic'] =  meta_info[scan_id]['intrinsic'][idx]
+                    else:
+                        if idx ==len(meta_info[scan_id]['image'])-1:
+                            process_info[scan_id]['intrinsic'] =  meta_info[scan_id]['intrinsic'][idx]
+                    process_info[scan_id]['axis_align_matrix'] = meta_info[scan_id]['axis_align_matrix']
+            return process_info       
 
-        with open('./data/annotations/embodiedscan_infos_full.json', 'r') as file:
-            self.scene = json.load(file)
+        meta_info = {}
+        meta_dir = './data/annotations/embodiedscan_video_meta'
+        for meta_data_file in os.listdir(meta_dir):
+            attribute_name = meta_data_file.split('.')[0]
+            meta_data = json.load(open(os.path.join(meta_dir,meta_data_file)))
+            for scan_id in meta_data:
+                if scan_id not in meta_info:
+                    meta_info[scan_id] = {}
+                if meta_data[scan_id] is not None:
+                    meta_info[scan_id][attribute_name] = meta_data[scan_id]
+
+        self.scene = combine_meta_info(meta_info)  
 
     def valid_pose(self, video_poses):
         valid_video_poses = []

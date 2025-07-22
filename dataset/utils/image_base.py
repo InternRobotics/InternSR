@@ -1,6 +1,6 @@
 import pandas as pd
 from abc import abstractmethod
-from smp import *
+from utils.base_utils import *
 
 
 def img_root_map(dataset):

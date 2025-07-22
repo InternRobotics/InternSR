@@ -1,5 +1,5 @@
 import os
-from smp import load_env
+from utils.base_utils import load_env
 
 INTERNAL = os.environ.get('INTERNAL', 0)
 

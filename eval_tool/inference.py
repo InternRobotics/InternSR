@@ -2,7 +2,7 @@ import torch
 import torch.distributed as dist
 from eval_tool.config import supported_VLM
 from utils import track_progress_rich
-from smp import *
+from utils.base_utils import *
 
 FAIL_MSG = 'Failed to obtain answer via API.'
 

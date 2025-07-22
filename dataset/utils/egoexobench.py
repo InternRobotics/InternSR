@@ -1,4 +1,4 @@
-from smp import *
+from utils.base_utils import *
 from .multiple_choice import extract_answer_from_item
 from PIL import Image, ImageOps
 import torchvision

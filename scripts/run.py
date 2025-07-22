@@ -48,8 +48,7 @@ from eval_tool.config import supported_VLM
 from dataset import build_dataset
 from eval_tool.inference import infer_data_job
 from eval_tool.inference_video import infer_data_job_video
-from eval_tool.inference_mt import infer_data_job_mt
-from smp import *
+from utils.base_utils import *
 from utils.result_transfer import MMMU_result_transfer, MMTBench_result_transfer
 
 
@@ -349,16 +348,6 @@ def main():
                         result_file_name=result_file_base,
                         verbose=args.verbose,
                         api_nproc=args.api_nproc,
-                        use_vllm=args.use_vllm)
-                elif dataset.TYPE == 'MT':
-                    model = infer_data_job_mt(
-                        model,
-                        work_dir=pred_root,
-                        model_name=model_name,
-                        dataset=dataset,
-                        verbose=args.verbose,
-                        api_nproc=args.api_nproc,
-                        ignore_failed=args.ignore,
                         use_vllm=args.use_vllm)
                 else:
                     model = infer_data_job(

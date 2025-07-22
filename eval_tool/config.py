@@ -674,7 +674,7 @@ qwen2vl_series = {
     ),
     "Qwen2.5-VL-7B-Instruct-ForVideo": partial(
         Qwen2VLChat,
-        model_path="Qwen/Qwen2.5-VL-7B-Instruct",
+        model_path="/mnt/inspurfs/mozi_t/linjingli/QwenVL/Qwen2.5-VL-7B-Instruct",
         min_pixels=128 * 28 * 28,
         max_pixels=768 * 28 * 28,
         total_pixels=24576 * 28 * 28,
