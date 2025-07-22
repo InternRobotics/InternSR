@@ -13,21 +13,19 @@ The Intern-EP repository focuses on embodied perception, covering both benchmark
 
 
 
-## 🔥 What's New
+## 🔥 News
+- [2025/07] - The first version of Intern-EP includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
 
-### Highlight
-2025/7 - The first version of Intern-EP includes the model LLaVA-3D, and benchmarks MMScan, OST-Bench, MMSI-Bench, and EgoExo-Bench.
+## 📋 Table of Contents
+- [🏠 Introduction](#-introduction)
+- [🔥 News](#-news)
+- [📚 Getting Started](#-getting-started)
+- [📦 Overview of Benchmark and Model Zoo](#-benchmark-model-zoo)
+- [🔍 Evaluation Tutorial](#-evaluation-tutorial)
+- [👏 Acknowledgements](#-acknowledgements)
+- [📝 TODO List](#-todo-list)
 
-## 📋 Overview of Intern-EP
-
-| Benchmark       | Domain                | Method                                      | Input Modality                                       | Data  Scale                                     |
-|-----------------|-----------------------|----------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|
-| [MMScan](https://tai-wang.github.io/mmscan/)        | Scene Understanding      | [LLaVA-3D](https://zcmax.github.io/projects/LLaVA-3D/) | `point cloud`, `image`, `video`, `text`              |  300k         |
-| [OST-Bench](https://rbler1234.github.io/OSTBench.github.io/)    | Scene Spatial Reasoning  | LLaVA / InternVL / QwenVL / Proprietary Models     | `video`, `text`                                      | 10k            |
-| [MMSI-Bench](https://runsenxu.com/projects/MMSI_Bench/)    | Scene Spatial Reasoning       | LLaVA / InternVL / QwenVL / Proprietary Models                      | `image`, `text`                      | 1k            |
-| EgoExo-Bench  | Scene Spatial Reasoning | LLaVA / InternVL / QwenVL / Proprietary Models                       | `video`,  `text`                             | 7k               |
-
-## 🔨 Getting Start
+## 📚 Getting Started
 Clone this repo.
 ```shell
 git clone https://github.com/rbler1234/Intern-EP.git
@@ -116,6 +114,15 @@ We recommend placing all data under `./data`. The expected directory structure u
     ```
 </details>
 
+## 📦 Overview of Benchmark and Model Zoo
+
+| Benchmark       | Domain                | Method                                      | Input Modality                                       | Data  Scale                                     |
+|-----------------|-----------------------|----------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|
+| [MMScan](https://tai-wang.github.io/mmscan/)        | Scene Understanding      | [LLaVA-3D](https://zcmax.github.io/projects/LLaVA-3D/) | `point cloud`, `image`, `video`, `text`              |  300k         |
+| [OST-Bench](https://rbler1234.github.io/OSTBench.github.io/)    | Scene Spatial Reasoning  | LLaVA / InternVL / QwenVL / Proprietary Models     | `video`, `text`                                      | 10k            |
+| [MMSI-Bench](https://runsenxu.com/projects/MMSI_Bench/)    | Scene Spatial Reasoning       | LLaVA / InternVL / QwenVL / Proprietary Models                      | `image`, `text`                      | 1k            |
+| EgoExo-Bench  | Scene Spatial Reasoning | LLaVA / InternVL / QwenVL / Proprietary Models                       | `video`,  `text`                             | 7k               |
+
 ## 🔍 Evaluation Tutorial
 ### For OST-Bench/MMSI-Bench/EgoExo-Bench
 Our evaluation framework for these benchmarks is built on [VLMEvalKit](https://github.com/open-compass/VLMEvalKit). The system supports evaluation of multiple model families including: o1/o3, GPT series, Gemini series, Claude series, InternVL series, QwenVL series and LLaVA series. You need to first configure the environment variables in `.env`:
@@ -154,9 +161,9 @@ python -m scripts.eval_mmscan_qa --answer-file path_of_result
 python -m scripts.eval_mmscan_gpt --answer-file path_of_result --api_key XXX --tmp_path tmp_path_to_save
 ```
 
-## 👏 Acknowledgements
+## 👏 Acknowledgement
 
-The evaluation code for OST-Bench / MMSI-Bench / EgoExo-Bench is based on [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
+- [VLMEvalKit](https://github.com/open-compass/VLMEvalKit): The evaluation code for OST-Bench / MMSI-Bench / EgoExo-Bench is based on VLMEvalKit.
 
 ## 📝 TODO List
 - \[ \] Support more models for MMScan.
