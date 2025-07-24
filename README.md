@@ -177,7 +177,7 @@ python -m scripts.eval_mmscan_gpt --answer-file path_of_result --api_key XXX --t
 
 ## 🏆 Leaderboard
 
-| Models | OST-Bench | MMSI-Bench | EgoExo-Bench | MMscan(2D) | MMscan(3D) |  
+| Models | OST-Bench | MMSI-Bench | EgoExo-Bench | MMScan(2D) | MMScan(3D) |  
 |---|---|---|---|---|---|
 | GPT-4o | 51.19 | 30.3 | 38.5 | 43.97 | - |
 | GPT-4.1 | 50.96 | 30.9 | - | - | - |
