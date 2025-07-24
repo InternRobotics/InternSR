@@ -137,15 +137,15 @@ class MMSIBenchDataset(ImageMCQDataset):
     TYPE = 'MCQ'
 
     DATASET_URL = {
-        'MMSI_Bench': 'https://huggingface.co/datasets/RunsenXu/MMSI-Bench/resolve/main/MMSI_bench.tsv'
+        'mmsi_bench': ''
     }
     DATASET_MD5 = {
-        'MMSI_Bench': 'c473f72a345f616fa68a628580b573b6'
+        'mmsi_bench': ''
     }
 
     @classmethod
     def supported_datasets(cls):
-        return ['MMSI_Bench']
+        return ['mmsi_bench']
 
     def dump_image(self, line):
         """

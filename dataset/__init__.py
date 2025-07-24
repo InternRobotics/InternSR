@@ -3,8 +3,8 @@ import warnings
 from .utils.image_base import img_root_map, ImageBaseDataset
 from .ost_bench import OSTDataset
 from .mmsi_bench import MMSIBenchDataset, MMSIBenchCircular
-from .egoexobench import EgoExoBench_MCQ
-from .mmscan_2d_bench import MMScanDataset
+from .egoexo_bench import EgoExoBench_MCQ
+from .mmscan_2d import MMScanDataset
 from .utils import *
 from utils.base_utils import *
 

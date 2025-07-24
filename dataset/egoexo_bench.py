@@ -15,15 +15,15 @@ class EgoExoBench_MCQ(VideoBaseDataset):
     MD5 = 'b5c3cfe5d316f1a67a4076991f16ca9c'
     TYPE = 'Video_MCQ'
 
-    def __init__(self, dataset='EgoExoBench_MCQ'):
+    def __init__(self, dataset='egoexo_bench'):
         super().__init__(dataset=dataset, nframe=64)
         self.frame_fps = 2
 
     @classmethod
     def supported_datasets(cls):
-        return ['EgoExoBench_MCQ']
+        return ['egoexo_bench']
 
-    def prepare_dataset(self, dataset_name='EgoExoBench_MCQ'):
+    def prepare_dataset(self, dataset_name='egoexo_bench'):
 
         self.video_root = osp.join(LMUDataRoot(),'videos')
 
@@ -240,7 +240,7 @@ class EgoExoBench_MCQ(VideoBaseDataset):
                     extract_pred = extract_option(
                         model,
                         data.loc[data['index'] == idx].to_dict(orient='records')[0],
-                        'EgoExoBench_MCQ',
+                        'egoexo_bench',
                     )
                     data.loc[idx, 'score'] = int(extract_pred == ans)
                 else:

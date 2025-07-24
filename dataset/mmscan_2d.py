@@ -75,8 +75,8 @@ def draw_box3d_points_on_img(
 
 class ImageILDataset(ImageBaseDataset):
 
-    DATASET_URL = {'MMScan_2d': ''}
-    DATASET_MD5 = {'MMScan_2d': ''}
+    DATASET_URL = {'mmscan_2d': ''}
+    DATASET_MD5 = {'mmscan_2d': ''}
 
     TYPE = 'IL'
     

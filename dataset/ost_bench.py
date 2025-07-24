@@ -9,9 +9,9 @@ expected folder structure.
 
 ```
 LMUDATA/
-├──OST.tsv
+├──ost_bench.tsv
 ├──images/
-├────OST/
+├────ost_bench/
 ├──────1mp3d_0004_region0
 ├──────1mp3d_0004_region10
 ├──────...
@@ -204,8 +204,8 @@ def collect_results(static_results):
 
 class ImageILDataset(ImageBaseDataset):
 
-    DATASET_URL = {'OST': 'https://opencompass.openxlab.space/utils/VLMEval/OST.tsv'}
-    DATASET_MD5 = {'OST': 'd5d528680379cf2795a47723ce0906e2'}
+    DATASET_URL = {'ost_bench': ''}
+    DATASET_MD5 = {'ost_bench': ''}
 
     TYPE = 'IL'
 
