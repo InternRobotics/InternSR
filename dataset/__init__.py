@@ -4,6 +4,7 @@ from .utils.image_base import img_root_map, ImageBaseDataset
 from .ost_bench import OSTDataset
 from .mmsi_bench import MMSIBenchDataset, MMSIBenchCircular
 from .egoexobench import EgoExoBench_MCQ
+from .mmscan_2d_bench import MMScanDataset
 from .utils import *
 from utils.base_utils import *
 
@@ -116,7 +117,7 @@ class ConcatDataset(ImageBaseDataset):
 
 # Add new supported dataset class here
 IMAGE_DATASET = [
-    OSTDataset,MMSIBenchDataset, MMSIBenchCircular
+    OSTDataset,MMSIBenchDataset, MMSIBenchCircular,MMScanDataset
 ]
 
 

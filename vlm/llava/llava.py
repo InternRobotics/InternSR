@@ -583,7 +583,7 @@ class LLaVA_OneVision(BaseModel):
                 images.append(img)
                 image_sizes.append(img.size)  # Store the size of each image
                 content += self.DEFAULT_IMAGE_TOKEN + "\n"
-        if dataset=='OST':
+        if dataset in ['OST','MMScan_2d']:
             self.model.config.image_aspect_ratio = 'pt'
 
         # Process images using the class attribute self.process_images

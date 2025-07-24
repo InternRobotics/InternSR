@@ -5,6 +5,9 @@ import json
 from tqdm import tqdm
 import shortuuid
 
+import sys
+sys.path.append("./vlm/llava_3d")
+
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_VIDEO_TOKEN
 from llava.conversation import conv_templates, SeparatorStyle
 from llava.model.builder import load_pretrained_model
@@ -29,6 +32,7 @@ def get_chunk(lst, n, k):
 def eval_model(args):
     # Model
     disable_torch_init()
+    print(args.model_path)
     model_path = os.path.expanduser(args.model_path)
     model_name = get_model_name_from_path(model_path)
     tokenizer, model, processor, context_len = load_pretrained_model(model_path, args.model_base, model_name)

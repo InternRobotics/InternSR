@@ -387,10 +387,10 @@ llava_series = {
         LLaVA_OneVision, model_path="lmms-lab/llava-onevision-qwen2-0.5b-ov"
     ),
     "llava_onevision_qwen2_7b_ov": partial(
-        LLaVA_OneVision, model_path="/mnt/inspurfs/mozi_t/linjingli/llava/llava-onevision-qwen2-7b-ov-chat"
+        LLaVA_OneVision, model_path="lmms-lab/llava-onevision-qwen2-7b-ov-chat"
     ),
     "llava_onevision_qwen2_72b_ov": partial(
-        LLaVA_OneVision, model_path="/mnt/inspurfs/mozi_t/linjingli/llava/llava-onevision-qwen2-72b-ov-sft"
+        LLaVA_OneVision, model_path="lmms-lab/llava-onevision-qwen2-72b-ov-sft"
     ),
     "Aquila-VL-2B": partial(LLaVA_OneVision, model_path="BAAI/Aquila-VL-2B-llava-qwen"),
     "llava_video_qwen2_7b": partial(
@@ -478,13 +478,13 @@ internvl2_5 = {
         InternVLChat, model_path="OpenGVLab/InternVL2_5-4B", version="V2.0"
     ),
     "InternVL2_5-8B": partial(
-        InternVLChat, model_path="/mnt/inspurfs/mozi_t/linjingli/Internvl/InternVL2_5-8B", version="V2.0"
+        InternVLChat, model_path="OpenGVLab/InternVL2_5-8B", version="V2.0"
     ),
     "InternVL2_5-26B": partial(
         InternVLChat, model_path="OpenGVLab/InternVL2_5-26B", version="V2.0"
     ),
     "InternVL2_5-38B": partial(
-        InternVLChat, model_path="/mnt/inspurfs/mozi_t/linjingli/Internvl/InternVL2_5-38B", version="V2.0"
+        InternVLChat, model_path="OpenGVLab/InternVL2_5-38B", version="V2.0"
     ),
     "InternVL2_5-78B": partial(
         InternVLChat, model_path="OpenGVLab/InternVL2_5-78B", version="V2.0"
@@ -563,7 +563,7 @@ internvl3 = {
         InternVLChat, model_path="OpenGVLab/InternVL3-2B", version="V2.0"
     ),
     "InternVL3-8B": partial(
-        InternVLChat, model_path="/mnt/inspurfs/mozi_t_2/linjingli/Internvl3/InternVL3-8B", version="V2.0",
+        InternVLChat, model_path="OpenGVLab/InternVL3-8B", version="V2.0",
     ),
     "InternVL3-9B": partial(
         InternVLChat, model_path="OpenGVLab/InternVL3-9B", version="V2.0"
@@ -572,7 +572,7 @@ internvl3 = {
         InternVLChat, model_path="OpenGVLab/InternVL3-14B", version="V2.0"
     ),
     "InternVL3-38B": partial(
-        InternVLChat, model_path="/mnt/inspurfs/mozi_t_2/linjingli/Internvl3/InternVL3-38B", version="V2.0"
+        InternVLChat, model_path="OpenGVLab/InternVL3-38B", version="V2.0"
     ),
     "InternVL3-78B": partial(
         InternVLChat, model_path="OpenGVLab/InternVL3-78B", version="V2.0"
@@ -667,14 +667,14 @@ qwen2vl_series = {
     ),
     "Qwen2.5-VL-7B-Instruct": partial(
         Qwen2VLChat,
-        model_path="/mnt/inspurfs/mozi_t/linjingli/QwenVL/Qwen2.5-VL-7B-Instruct",
+        model_path="Qwen/Qwen2.5-VL-7B-Instruct",
         min_pixels=1280 * 28 * 28,
         max_pixels=16384 * 28 * 28,
         use_custom_prompt=False,
     ),
     "Qwen2.5-VL-7B-Instruct-ForVideo": partial(
         Qwen2VLChat,
-        model_path="/mnt/inspurfs/mozi_t/linjingli/QwenVL/Qwen2.5-VL-7B-Instruct",
+        model_path="Qwen/Qwen2.5-VL-7B-Instruct",
         min_pixels=128 * 28 * 28,
         max_pixels=768 * 28 * 28,
         total_pixels=24576 * 28 * 28,

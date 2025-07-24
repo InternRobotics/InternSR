@@ -19,4 +19,4 @@ if __name__=='__main__':
                         required=True)
     args = parser.parse_args()
     answer_data = json.load(open(args.result_json))
-    evaluate(answer_data)
+    print(evaluate(answer_data))

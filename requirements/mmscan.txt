@@ -1,4 +1,0 @@
-openai
-pycocoevalcap
-sentence-transformers
-transformers

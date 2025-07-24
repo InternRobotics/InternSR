@@ -159,7 +159,7 @@ def qa_prompt_define():
     """
 
     system_prompt = (
-        'Evaluate a model-generated QA result against a human-generated answer for a 3D model.'
+        'Evaluate a model-generated QA result against a human-generated answer for a model.'
         +
         ' I will give you a dict with "Question", "Model Answer" and "Human Answer".Please fully understand the'
         +

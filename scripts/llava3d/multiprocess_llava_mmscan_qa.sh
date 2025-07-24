@@ -2,8 +2,8 @@
 
 # Assign the command line arguments to variables
 model_path='checkpoints/llava-3d-7b'
-question_path='playground/data/annotations/llava-3d-mmscan_QA_val.json'
-base_answer_path='mmscan_qa'
+question_path='./data/annotations/mmscan_qa_val_0.01.json'
+base_answer_path='result.json'
 N=6
 
 # Loop over each chunk/process

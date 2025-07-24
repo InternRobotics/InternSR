@@ -37,3 +37,7 @@ transformers
 typing_extensions
 validators
 xlsxwriter
+openai
+pycocoevalcap
+sentence-transformers
+torch-scatter

@@ -33,6 +33,7 @@ Currently, InternSR focuses on spatial reasoning from ego-centric raw visual obs
 - [📦 Overview of Benchmark and Model Zoo](#-benchmark-model-zoo)
 - [🔧 Installation](#-installation)
 - [📚 Getting Started](#-getting-started)
+- [🏆 Leaderboard](#-leaderboard)
 - [👥 Contribute](#-contribute)
 - [🔗 Citation](#-citation)
 - [📄 License](#-license)
@@ -45,14 +46,14 @@ Currently, InternSR focuses on spatial reasoning from ego-centric raw visual obs
 | [MMScan](https://tai-wang.github.io/mmscan/) | Spatial Understanding | InternVL, LLaVA, QwenVL, Proprietary Models, LLaVA-3D | ego-centric videos |  300k         |
 | [OST-Bench](https://rbler1234.github.io/OSTBench.github.io/) | Online Spatio-temporal Reasoning | InternVL, LLaVA, QwenVL, Proprietary Models | ego-centric videos | 10k            |
 | [MMSI-Bench](https://runsenxu.com/projects/MMSI_Bench/)    | Multi-image Spatial Reasoning| InternVL, LLaVA, QwenVL, Proprietary Models | multi-view images | 1k            |
-| EgoExo-Bench  | Ego-Exo Cross-view Spatial Reasoning| InternVL, LLaVA, QwenVL, Proprietary Models | ego-exo cross-view videos| 7k               |
+| [EgoExo-Bench](https://github.com/ayiyayi/EgoExoBench/tree/main)  | Ego-Exo Cross-view Spatial Reasoning| InternVL, LLaVA, QwenVL, Proprietary Models | ego-exo cross-view videos| 7k               |
 
 ## 🛠️ Installation
 
 ```shell
 git clone https://github.com/InternRobotics/InternSR.git
 cd InternSR
-pip install -e .
+pip install .
 ```
 
 ## 📚 Getting Started
@@ -112,7 +113,7 @@ data/
 - #### EgoExo-Bench
     1. Download the processed video data from the [Hugging Face](https://huggingface.co/datasets/onlyfaces/EgoExoBench/tree/main). 
     2. Due to license restrictions, data from the [Ego-Exo4D](https://ego-exo4d-data.org/) project is not included. Users should acquire it separately by following the official Ego-Exo4D guidelines.
-    3. Download the [`.tsv` file](https://drive.google.com/file/d/1pRGd9hUgwCzMU6JSPFxpjGAtCChwIB9G/view?usp=sharing) , place them as follows: 
+    3. Download the [`.tsv` file](https://huggingface.co/datasets/Heleun/EgoExoBench_MCQ/tree/main) , place them as follows: 
     ```shell
     data/
     ├── videos/
@@ -134,7 +135,7 @@ LMUData = "./data" # the relative/absolute path of the `data` folder.
 Available models and their configurations can be modified in `eval_tool/config.py`. To evaluate models on MMSI-Bench/OST-Bench/EgoExo-Bench, execute the following commands:
 ```shell
 # for VLMs that consume small amounts of GPU memory
-torchrun --nproc-per-node=1 scripts/run.py --data MMSI_Bench/OST/EgoExoBench_MCQ --model model_name
+torchrun --nproc-per-node=4 scripts/run.py --data MMSI_Bench/OST/EgoExoBench_MCQ --model model_name
 
 # for very large VLMs
 python scripts/run.py --data MMSI_Bench/OST/EgoExoBench_MCQ --model model_name
@@ -145,7 +146,10 @@ python scripts/run.py --data MMSI_Bench/OST/EgoExoBench_MCQ --model model_name
 
 ### Spatial Understanding Benchmark: MMScan
 
-We only support LLaVA-3D for the MMScan Question Answering Benchmark currently. To run LLaVA-3D on MMScan, download the [model checkpoints](https://huggingface.co/ChaimZhu/LLaVA-3D-7B) and execute the following command:
+We provide two versions of the MMScan benchmark. For the 3D version, we supply RGB videos with depth information, along with camera parameters for each frame as input. The corresponding object prompts are provided in the form of 3D bounding boxes. For the 2D version, we provide RGB videos, with the corresponding object prompts given as the projected center of the object in each image.
+
+(1) (3D Version)
+We only support LLaVA-3D for the MMScan 3D Version. To run LLaVA-3D on MMScan, download the [model checkpoints](https://huggingface.co/ChaimZhu/LLaVA-3D-7B) and execute the following command:
 ```shell
 # Single Process
 bash scripts/llava3d/llava_mmscan_qa.sh --model-path path_of_ckpt --question-file ./data/annotations/mmscan_qa_val_{ratio}.json --question-file path_to_save --num-chunks 1 --chunk_idx 1
@@ -153,15 +157,49 @@ bash scripts/llava3d/llava_mmscan_qa.sh --model-path path_of_ckpt --question-fil
 # Multiple Processes
 bash scripts/llava3d/multiprocess_llava_mmscan_qa.sh
 ```
+(2) (2D Version) For the 2D version, execute the following command to generate the results in `.xlsx` format:
+```shell
+# for VLMs that consume small amounts of GPU memory
+torchrun --nproc-per-node=4 scripts/run.py --data MMScan_2d --model model_name
+
+# for very large VLMs
+python scripts/run.py --data MMScan_2d --model model_name
+```
+
 After obtaining results, use MMScan evaluators:
 ```shell
-# Traditional Metrics
+# Traditional Metrics (3D Version)
 python -m scripts.eval_mmscan_qa --answer-file path_of_result
 
-# GPT Evaluator
+# GPT Evaluator (2D/3D Version)
 python -m scripts.eval_mmscan_gpt --answer-file path_of_result --api_key XXX --tmp_path tmp_path_to_save
 ```
 
+## 🏆 Leaderboard
+
+| Models | OST-Bench | MMSI-Bench | EgoExo-Bench | MMscan(2D) | MMscan(3D) |  
+|---|---|---|---|---|---|
+| GPT-4o | 51.19 | 30.3 | 38.5 | 43.97 | - |
+| GPT-4.1 | 50.96 | 30.9 | - | - | - |
+| Claude-3.7-sonnet | - | 30.2 | 32.8 | - | - |
+| QwenVL2.5-7B | 41.07 | 25.9 | 32.8 | - | - |
+| QwenVL2.5-32B | 47.33 | - | 39.7 | - | - |
+| QwenVL2.5-72B | - | 30.7 | 44.7 | - | - |
+| QwenVL2.5-7B | 41.07 | 25.9 | 32.8 | 39.53 | - |
+| QwenVL2.5-32B | 47.33 | - | 39.7 | - | - |
+| QwenVL2.5-72B | - | 30.7 | 44.7 | - | - |
+| InternVL2.5-8B | 47.94 | 28.7 | - | 39.36 | - |
+| InternVL2.5-38B | - | - | - | 46.02 | - |
+| InternVL2.5-78B | 47.94 | 28.5 | - | - | - |
+| InternVL3-8B | - | 25.7 | 31.3 | 44.97 | - |
+| InternVL3-38B | - | - | - | - | - |
+| LLaVA-OneVision-7B | 34.92 | - | 29.5 | 39.36 | - |
+| LLaVA-OneVision-72B | 44.59 | 28.4 | - | - | - |
+| LLaVA-3D| - | - | - | - | 46.35 |
+
+**Note** : 
+- Different transformer versions may cause output variations within ±3 percentage points for the same model.
+- For more detailed results, please refer to the original repositories/papers of these works.
 ## 👥 Contribute
 
 We appreciate all contributions to improve InternSR. Please refer to our [contribution guide]() for the detailed instruction. For new models and benchmarks support based on VLMEvalKit, the user can also refer to the [guideline from VLMEvalKit](https://github.com/open-compass/VLMEvalKit/blob/main/docs/en/Development.md).

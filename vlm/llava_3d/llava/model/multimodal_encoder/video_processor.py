@@ -251,8 +251,9 @@ class RGBDVideoProcessor(ProcessorMixin):
             intrinsic_file = np.stack(intrinsics, axis=0) # Vx4x4 array
         else:
             intrinsic_file = np.array(video_info['intrinsic']) # 4x4 array
-            depth_intrinsic_file = np.array(video_info['depth_intrinsic'])  # 4x4 array
-            sampled_video_info['depth_intrinsic_file'] = depth_intrinsic_file
+            if 'depth_intrinsic' in video_info:
+                depth_intrinsic_file = np.array(video_info['depth_intrinsic'])  # 4x4 array
+                sampled_video_info['depth_intrinsic_file'] = depth_intrinsic_file
 
         axis_align_matrix_file = np.array(video_info['axis_align_matrix'])  # 4x4 array
         sampled_video_info['sample_image_files'] = images
