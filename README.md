@@ -198,7 +198,7 @@ python -m scripts.eval_mmscan_gpt --answer-file path_of_result --api_key XXX --t
 | LLaVA-3D| - | - | - | - | 46.35 |
 
 **Note** : 
-- Different transformer versions may cause output variations within ±3 percentage points for the same model.
+- Different `transformers` versions may cause output variations within ±3% for the same model.
 - For more detailed results, please refer to the original repositories/papers of these works.
 ## 👥 Contribute
 
