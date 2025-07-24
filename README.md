@@ -1,10 +1,17 @@
-# InternSR
+<div align="center">
+  <img src="assets/InternSR.png" width="600"/>
+</div>
+
+<div align="center">
+
 [![Gradio Demo](https://img.shields.io/badge/Gradio-Demo-orange?style=flat&logo=gradio)](#)
 [![doc](https://img.shields.io/badge/Document-FFA500?logo=readthedocs&logoColor=white)](#)
 [![GitHub star chart](https://img.shields.io/github/stars/InternRobotics/InternSR?style=square)](#)
 [![GitHub Issues](https://img.shields.io/github/issues/InternRobotics/InternSR)](#)
 <a href="https://cdn.vansin.top/taoyuan.jpg"><img src="https://img.shields.io/badge/WeChat-07C160?logo=wechat&logoColor=white" height="20" style="display:inline"></a>
 [![Discord](https://img.shields.io/discord/1373946774439591996?logo=discord)](https://discord.gg/5jeaQHUj4B)
+
+</div>
 
 ## 🏠 Introduction
 
