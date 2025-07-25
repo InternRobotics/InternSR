@@ -118,6 +118,12 @@ If you use the specific pretrained models and benchmarks, please kindly cite the
     year = {2025},
     booktitle={arXiv},
 }
+@misc{egoexobench,
+    title = {{EgoExoBench: A} Benchmark for First- and Third-person View Video Understanding in MLLMs},
+    author = {He, Yuping and Huang, Yifei and Chen, Guo and Pei, Baoqi and Xu, Jilan and Lu, Tong and Pang, Jiangmiao},
+    year = {2025},
+    booktitle={arXiv},
+}
 @inproceedings{mmscan,
     title={{MMScan: A} Multi-Modal 3D Scene Dataset with Hierarchical Grounded Language Annotations},
     author={Lyu, Ruiyuan and Lin, Jingli and Wang, Tai and Yang, Shuai and Mao, Xiaohan and Chen, Yilun and Xu, Runsen and Huang, Haifeng and Zhu, Chenming and Lin, Dahua and Pang, Jiangmiao},
